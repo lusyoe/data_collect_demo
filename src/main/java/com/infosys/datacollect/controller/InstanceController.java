@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.pagehelper.PageHelper;
 import com.infosys.datacollect.dao.InstanceTypeMapper;
 import com.infosys.datacollect.domain.Instance;
 import com.infosys.datacollect.domain.InstanceType;
@@ -22,7 +21,6 @@ import com.infosys.datacollect.domain.Message;
 import com.infosys.datacollect.exception.InstanceNotFoundException;
 import com.infosys.datacollect.service.InstanceService;
 
-@SuppressWarnings("unchecked")
 @RestController
 @RequestMapping("/v1/instance")
 public class InstanceController {
@@ -36,9 +34,8 @@ public class InstanceController {
     @GetMapping(value = "/current")
     public Message showInstanceAll() {
         
-        PageHelper.startPage(1, 1);
-        
         Message message = new Message();
+        
         List<InstanceView> all = instanceService.findAll();
 
         message.setData(all);

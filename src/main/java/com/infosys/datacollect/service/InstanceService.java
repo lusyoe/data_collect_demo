@@ -7,7 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pagehelper.PageHelper;
 import com.infosys.datacollect.dao.InstanceMapper;
 import com.infosys.datacollect.dao.InstanceViewMapper;
 import com.infosys.datacollect.domain.Instance;
@@ -25,10 +27,12 @@ public class InstanceService {
     private InstanceMapper instanceMapper;
 
     public List<InstanceView> findAll() {
+        
+        PageHelper.startPage(1, 5);
         return instanceViewMapper.findAll();
     }
 
-    
+    @Transactional
     public void addInstance(Instance record) {
         instanceMapper.insert(record);
     }
