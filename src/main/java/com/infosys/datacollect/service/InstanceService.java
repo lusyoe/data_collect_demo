@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.infosys.datacollect.dao.InstanceMapper;
 import com.infosys.datacollect.dao.InstanceViewMapper;
@@ -20,15 +21,22 @@ public class InstanceService {
 
     private static final Logger log = LoggerFactory.getLogger(InstanceService.class);
 
+    private final int LIMIT = 5;
+    
     @Autowired
     private InstanceViewMapper instanceViewMapper;
     
     @Autowired
     private InstanceMapper instanceMapper;
 
-    public List<InstanceView> findAll() {
+    public List<InstanceView> findAll(Integer page) {
         
-        PageHelper.startPage(1, 5);
+        if (page == null || page == 1) {
+            PageHelper.startPage(1, LIMIT);
+        } else {
+            PageHelper.offsetPage(page, LIMIT);
+        }
+        
         return instanceViewMapper.findAll();
     }
 

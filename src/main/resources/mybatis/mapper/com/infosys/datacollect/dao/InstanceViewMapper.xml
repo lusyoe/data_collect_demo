@@ -8,7 +8,7 @@
 	</resultMap>
 
 	<select id="findAll" resultMap="BaseResultMap">
-		SELECT * FROM instance_view
+		SELECT * FROM instance_view ORDER BY id
 	</select>
 	
 	<select id="findOne" parameterType="integer" resultMap="BaseResultMap">

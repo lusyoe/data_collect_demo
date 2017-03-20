@@ -32,11 +32,17 @@ public class InstanceController {
     private InstanceTypeMapper instanceTypeMapper;
 
     @GetMapping(value = "/current")
-    public Message showInstanceAll() {
+    public Message showInstances() {
+        
+        return showInstances(1);
+    }
+    
+    @GetMapping(value = "/current/{page}")
+    public Message showInstances(@PathVariable Integer page) {
         
         Message message = new Message();
         
-        List<InstanceView> all = instanceService.findAll();
+        List<InstanceView> all = instanceService.findAll(page);
 
         message.setData(all);
         message.setStatus(OK);
@@ -45,7 +51,7 @@ public class InstanceController {
         return message;
     }
 
-    @GetMapping(value = "/current/{id}")
+    @GetMapping(value = "/{id}")
     public InstanceView showInstance(@PathVariable Integer id) throws Exception {
 
         InstanceView instance = instanceService.findOne(id);

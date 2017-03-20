@@ -39,7 +39,7 @@ public class InstanceTest {
 
         log.info("testing selectAll()....");
 
-        List all = service.findAll();
+        List all = service.findAll(1);
 
         assertNotNull("failure - List is null", all);
     }
