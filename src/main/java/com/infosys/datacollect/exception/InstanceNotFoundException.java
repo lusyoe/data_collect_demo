@@ -2,6 +2,9 @@ package com.infosys.datacollect.exception;
 
 public class InstanceNotFoundException extends RuntimeException {
 
+   
+    private static final long serialVersionUID = 9218497187842613747L;
+    
     private int instanceId;
 
     public int getInstanceId() {
