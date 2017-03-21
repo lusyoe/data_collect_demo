@@ -9,7 +9,7 @@ import tk.mybatis.mapper.common.MySqlMapper;
 
 public interface BaseDao<T> extends Mapper<T>, MySqlMapper<T> {
 
-    public List<T> findAll();
+    public List<T> findAll(InstanceView record);
 
     public T findOne(Integer id);
 }

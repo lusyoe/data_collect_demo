@@ -7,8 +7,18 @@
 		<result column="category" property="categoryName" />
 	</resultMap>
 
-	<select id="findAll" resultMap="BaseResultMap">
-		SELECT * FROM instance_view ORDER BY id
+	<select id="findAll" resultMap="BaseResultMap" parameterType="InstanceView">
+		SELECT * FROM instance_view WHERE 1=1
+		<if test="name != null">
+			AND name = #{name}
+		</if>
+		<if test="typeName != null">
+			AND type = #{typeName}
+		</if>
+		<if test="categoryName != null">
+			AND category = #{categoryName}
+		</if>
+		ORDER BY id
 	</select>
 	
 	<select id="findOne" parameterType="integer" resultMap="BaseResultMap">
