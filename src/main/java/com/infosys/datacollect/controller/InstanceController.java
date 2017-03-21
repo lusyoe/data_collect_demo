@@ -45,21 +45,19 @@ public class InstanceController {
     @ApiOperation(value = "获取默认资源实例列表", notes = "默认只显示第一页")
     public Message showInstances(HttpServletResponse response) {
 
-        return showInstances(1, "", response);
+        return showInstances(1, "");
     }
 
     @GetMapping(value = "/current/{page}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ApiOperation(value = "获取资源实例列表", notes = "需要提供页码")
+    @ApiOperation(value = "获取资源实例列表", notes = "需要提供页码", produces = "application/json")
     @ApiImplicitParams(value =  {
-            @ApiImplicitParam(name = "page", value = "页码", required = true, dataType = "Integer"),
-            @ApiImplicitParam(name = "query", value = "请求参数", required = false),
+            @ApiImplicitParam(name = "page", value = "页码", required = true,
+                    paramType = "path", dataType = "int"),
+            @ApiImplicitParam(name = "query", value = "请求参数", paramType = "query")
     })
     public Message showInstances(@PathVariable Integer page, 
-            @RequestParam(value = "query") String instanceViewjson,
-            HttpServletResponse response) {
+            @RequestParam(value = "query") String instanceViewjson) {
 
-        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-        
         Message message = new Message();
         InstanceView record = JSON.parseObject(instanceViewjson, InstanceView.class);
 

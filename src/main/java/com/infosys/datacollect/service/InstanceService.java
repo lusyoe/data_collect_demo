@@ -41,14 +41,15 @@ public class InstanceService {
     public List<InstanceView> findAll(Integer page, InstanceView record) {
 
         if (page == null || page == 1) {
-            PageHelper.startPage(1, LIMIT);
+            PageHelper.startPage(0, LIMIT);
+        } else if (record != null){
+            PageHelper.offsetPage(0, LIMIT);
         } else {
-            PageHelper.offsetPage(page, LIMIT);
+            PageHelper.offsetPage(page - 1 + LIMIT, LIMIT);
         }
 
         return instanceViewMapper.findAll(record);
     }
-    
 
     @Transactional
     public void addInstance(Instance record) {
