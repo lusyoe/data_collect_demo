@@ -1,20 +1,25 @@
 package com.infosys.datacollect.domain;
 
-import javax.validation.constraints.NotNull;
-
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotNull;
 
 public class Instance {
 
+    @ApiModelProperty(hidden = true)
     private Integer id;
     
     @NotBlank
+    @ApiModelProperty(value = "实例名称", example = "Test")
     private String name;
     
     @NotNull
+    @ApiModelProperty(value = "实例类别", example = "1")
     private Integer typeId;
     
     @NotNull
+    @ApiModelProperty(value = "实例类型", example = "2")
     private Integer categoryId;
 
     public Integer getId() {
