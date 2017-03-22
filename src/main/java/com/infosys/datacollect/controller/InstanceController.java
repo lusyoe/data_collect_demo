@@ -25,7 +25,7 @@ import static com.infosys.datacollect.utils.Constans.OK;
 
 @RestController
 @RequestMapping("/v1/instance")
-@Api(value = "/v1/instance", tags = "资源管理", description = "资源管理模块接口v1")
+@Api(tags = "resource manager", description = "资源管理模块接口v1")
 public class InstanceController {
 
     @Autowired
