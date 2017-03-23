@@ -1,10 +1,12 @@
 package com.infosys.datacollect.domain;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
 
+@ApiModel(value = "instance", description = "资源实例对象")
 public class Instance {
 
     @ApiModelProperty(hidden = true)

@@ -1,25 +1,23 @@
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.assertNotNull;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.List;
-
+import com.infosys.datacollect.Application;
+import com.infosys.datacollect.service.InstanceService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
-import com.infosys.datacollect.Application;
-import com.infosys.datacollect.service.InstanceService;
+import java.util.List;
+
+import static org.junit.Assert.assertNotNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
@@ -51,12 +49,16 @@ public class InstanceTest {
 
     @Test
     public void testFindOne() throws Exception {
-        String url = "/v1/instance/current/1";
-        mock.perform(get(url))
-            .andDo(print())
-            .andExpect(status().isOk())
-            .andExpect(content()
-                    .string(containsString("test")));
+        String url = "/v1/instance/13";
+        ResultActions resultActions = mock.perform(get(url))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        MockHttpServletResponse response = resultActions.andReturn().getResponse();
+
+        String content = response.getContentAsString();
+
+        log.debug("content = " + content);
     }
     
     

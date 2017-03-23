@@ -5,6 +5,8 @@
 		<result column="name" property="name" />
 		<result column="type" property="typeName" />
 		<result column="category" property="categoryName" />
+		<result column="create_time" property="createTime"  jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 
 	<select id="findAll" resultMap="BaseResultMap" parameterType="InstanceView">
@@ -22,6 +24,6 @@
 	</select>
 	
 	<select id="findOne" parameterType="integer" resultMap="BaseResultMap">
-		SELECT * FROM instance_view WHERE id=#{id}
+		SELECT create_time, update_time FROM instance_view WHERE id=#{id}
 	</select>
 </mapper>

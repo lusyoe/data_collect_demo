@@ -41,14 +41,14 @@ public class InstanceController {
         return showInstances(1, "");
     }
 
-    @GetMapping(value = "/current/{page}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/current/p/{page}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "获取资源实例列表", notes = "需要提供页码", produces = "application/json")
     @ApiImplicitParams(value =  {
             @ApiImplicitParam(name = "page", value = "页码", required = true,
                     paramType = "path", dataType = "int"),
             @ApiImplicitParam(name = "query", value = "请求参数", paramType = "query")
     })
-    public Message showInstances(@PathVariable Integer page, 
+    public Message showInstances(@PathVariable Integer page,
             @RequestParam(value = "query") String instanceViewjson) {
 
         Message message = new Message();
@@ -94,6 +94,13 @@ public class InstanceController {
     public InstanceType showInstanceType(@PathVariable Integer id) {
 
         return instanceTypeMapper.findOne(id);
+    }
+
+    private Message getMessage() {
+        Message msg = new Message();
+        msg.setStatus(OK);
+        msg.setMsg("success");
+        return msg;
     }
 
 }
